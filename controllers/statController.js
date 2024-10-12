@@ -13,7 +13,7 @@ const getStatistics = async (req, res) => {
       {
         $match: {
           $expr: {
-            $eq: [{ $month: "$dateOfSale" }, parseInt(month)] // Compare month of dateOfSale with selected month
+            $eq: [{ $month: "$dateOfSale" }, parseInt(month)] 
           },
         },
       },
