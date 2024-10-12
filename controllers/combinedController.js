@@ -1,4 +1,3 @@
-// controllers/combinedController.js
 const { getDB } = require('../config/db');
 const { getStatistics } = require('./statController');
 const { getPriceRangeBarChart, getCategoryPieChart } = require('./chartController');
@@ -13,7 +12,7 @@ const getCombinedData = async (req, res) => {
   try {
     const collection = getDB().collection('products');
 
-    // Initiate all queries concurrently
+ 
     const transactionsPromise = collection.find({
       $expr: {
         $eq: [{ $month: "$dateOfSale" }, parseInt(month)]
@@ -45,7 +44,7 @@ const getCombinedData = async (req, res) => {
   }
 };
 
-// Internal functions to fetch data without sending responses
+
 const getStatisticsInternal = async (month) => {
   const collection = getDB().collection('products');
   const stats = await collection.aggregate([
