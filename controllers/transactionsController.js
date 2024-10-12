@@ -60,13 +60,13 @@ const seedDatabase = async (req, res) => {
     await collection.insertMany(data);
 
     collection.updateMany(
-      { dateOfSale: { $type: "string" } }, // Select documents where dateOfSale is a string
+      { dateOfSale: { $type: "string" } }, 
       [
         {
           $set: {
             dateOfSale: {
               $dateFromString: {
-                dateString: "$dateOfSale" // Convert string to Date
+                dateString: "$dateOfSale" 
               }
             }
           }
