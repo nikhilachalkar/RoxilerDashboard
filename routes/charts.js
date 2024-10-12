@@ -3,10 +3,10 @@ const { getPriceRangeBarChart, getCategoryPieChart } = require('../controllers/c
 
 const router = express.Router();
 
-// Route for price range bar chart
+
 router.get('/price-range-bar-chart', getPriceRangeBarChart);
 
-// Route for category pie chart
+
 router.get('/category-pie-chart', getCategoryPieChart);
 
 module.exports = router;
