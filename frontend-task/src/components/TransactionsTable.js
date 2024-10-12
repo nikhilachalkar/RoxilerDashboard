@@ -12,7 +12,7 @@ const TransactionsTable = ({ selectedMonth }) => {
       const response = await axios.get(`https://roxilerdashboard-yogu.onrender.com/transactions`, {
         params: { month: selectedMonth, search: searchTerm, page, perPage },
       });
-      console.log('Transactions Data:', response.data); // Log data to check imageUrl
+      console.log('Transactions Data:', response.data); 
       setTransactions(response.data);
     } catch (error) {
       console.error('Error fetching transactions:', error);
