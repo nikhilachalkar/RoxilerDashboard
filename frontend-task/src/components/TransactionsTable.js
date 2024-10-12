@@ -37,6 +37,12 @@ const TransactionsTable = ({ selectedMonth }) => {
 
   return (
     <div>
+    <input
+        type="text"
+        placeholder="Search transactions"
+        value={searchTerm}
+        onChange={handleSearchChange}
+      />
       <h2>Transactions Table for Month {selectedMonth}</h2>
       <table>
         <thead>
