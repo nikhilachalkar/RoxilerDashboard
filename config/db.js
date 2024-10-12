@@ -1,4 +1,3 @@
-// config/db.js
 const { MongoClient, ServerApiVersion } = require('mongodb');
 require('dotenv').config();
 
@@ -22,7 +21,7 @@ const connectDB = async () => {
     console.log('Successfully connected to MongoDB');
   } catch (err) {
     console.error('MongoDB connection error:', err);
-    process.exit(1); // Exit process with failure
+    process.exit(1); 
   }
 };
 
