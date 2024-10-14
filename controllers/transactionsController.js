@@ -21,6 +21,29 @@ const listTransactions = async (req, res) => {
         .limit(parseInt(perPage))
         .toArray();
 
+      if (search) {
+      const priceSearch = Number(search);
+      const filter = {
+      $or: [
+      { title: { $regex: search, $options: 'i' } },
+      { description: { $regex: search, $options: 'i' } }
+        ]
+      };
+
+      if (!isNaN(priceSearch)) {
+        filter.$or.push({ price: priceSearch });
+      }
+
+      transactions_ = await collection_
+        .find(filter)
+        .skip(skip)
+        .limit(parseInt(perPage))
+        .toArray();
+        
+    }
+
+      
+      
       return res.status(200).json(transactions_);
     }
 
