@@ -4,12 +4,27 @@ const { getDB } = require('../config/db');
 const listTransactions = async (req, res) => {
   const { month, search = '', page = 1, perPage = 10 } = req.query;
 
-  if (!month || isNaN(month) || month < 1 || month > 12) {
+  
+  if (!month || isNaN(month) || month < 1 || month > 13) {
     return res.status(400).send('Invalid month');
   }
 
   try {
     const skip = (page - 1) * perPage;
+
+    
+    if (parseInt(month) === 13) {
+      const collection_ = getDB().collection('products');
+      const transactions_ = await collection_
+        .find()
+        .skip(skip)
+        .limit(parseInt(perPage))
+        .toArray();
+
+      return res.status(200).json(transactions_);
+    }
+
+    
     const filter = {
       $expr: {
         $eq: [{ $month: "$dateOfSale" }, parseInt(month)]
@@ -18,24 +33,19 @@ const listTransactions = async (req, res) => {
 
     if (search) {
       const priceSearch = Number(search);
+      filter.$or = [
+        { title: { $regex: search, $options: 'i' } },
+        { description: { $regex: search, $options: 'i' } }
+      ];
       if (!isNaN(priceSearch)) {
-        filter.$or = [
-          { title: { $regex: search, $options: 'i' } },
-          { description: { $regex: search, $options: 'i' } },
-          { price: priceSearch },
-        ];
-      } else {
-        filter.$or = [
-          { title: { $regex: search, $options: 'i' } },
-          { description: { $regex: search, $options: 'i' } },
-        ];
+        filter.$or.push({ price: priceSearch });
       }
     }
 
     const collection = getDB().collection('products');
     const transactions = await collection
       .find(filter)
-      .skip(parseInt(skip))
+      .skip(skip)
       .limit(parseInt(perPage))
       .toArray();
 
@@ -53,21 +63,20 @@ const seedDatabase = async (req, res) => {
 
     const collection = getDB().collection('products');
 
-    // Clear existing records
+    
     await collection.deleteMany({});
 
-    // Insert new data
+    
     await collection.insertMany(data);
 
-    collection.updateMany(
-      { dateOfSale: { $type: "string" } }, 
+    
+    await collection.updateMany(
+      { dateOfSale: { $type: "string" } },
       [
         {
           $set: {
             dateOfSale: {
-              $dateFromString: {
-                dateString: "$dateOfSale" 
-              }
+              $dateFromString: { dateString: "$dateOfSale" }
             }
           }
         }
