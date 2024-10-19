@@ -12,7 +12,9 @@ This website is hosted at https://roxiler-frontend-v8yn.onrender.com
                                                                                                           
                                                                                                           
                                                                                                           
-![image](https://github.com/user-attachments/assets/dcbc92bb-3741-4889-b10d-319d0f197a9f)
+![image](https://github.com/user-attachments/assets/c6fb913e-7768-42ca-a741-a5ddea381003)
 
-![image](https://github.com/user-attachments/assets/cb4b99f3-b816-42ae-a6e8-4c6e62cb2f44)
+
+![image](https://github.com/user-attachments/assets/32fd1c35-2fc0-4650-8628-cba2c0c03330)
+
 
