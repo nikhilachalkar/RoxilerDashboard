@@ -129,3 +129,46 @@ const getCategoryPieChartInternal = async (month) => {
 };
 
 module.exports = { getCombinedData };
+
+// version: '3.8'
+
+// services:
+//   frontend:
+//     build:
+//       context: ./frontend-task
+//     ports:
+//       - "3000:3000"
+//     depends_on:
+//       - backend
+//     environment:
+//       - REACT_APP_BACKEND_URL=http://localhost:5000
+
+//   backend:
+//     build:
+//       context: ./backend
+//     ports:
+//       - "5000:5000"
+//     environment:
+//       - MONGO_URI=mongodb+srv://nikhilachalkar03:V3xrK3QWbjGJeB7r@roxiler.uecpq.mongodb.net/?retryWrites=true&w=majority&appName=Roxiler
+
+
+// FROM node:18
+
+
+// WORKDIR /app
+
+
+// COPY package*.json ./
+
+
+// RUN npm install
+
+
+// COPY . .
+
+
+// EXPOSE 3000
+
+
+// CMD ["npm", "start"]
+
